@@ -1260,18 +1260,6 @@ input[type="time"]::-webkit-calendar-picker-indicator,
   font-size: 0.9rem;
 }
 
-.event-filters { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.event-filters select {
-  padding: 0.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-}
-
 .event-status {
   display: inline-block;
   padding: 0.2rem 0.6rem;
@@ -1798,7 +1786,6 @@ body.compare-open { padding-bottom: min(50vh, 320px); }
     max-width: none;
   }
   .faq-controls { flex-direction: column; }
-  .event-filters { flex-direction: column; }
   .room-guide-list { grid-template-columns: 1fr; }
   .hero-slider { min-height: 380px; }
   .section-title { margin-bottom: 1.75rem; }
