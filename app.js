@@ -694,7 +694,7 @@
   function renderFeaturedGames() {
     const el = $('#featured-games');
     if (!el) return;
-    const top = [...BOARD_GAMES].sort((a, b) => b.popularity - a.popularity).slice(0, 4);
+    const top = [...BOARD_GAMES].sort((a, b) => b.popularity - a.popularity).slice(0, 3);
     el.innerHTML = top.map(g => renderGameCard(g, true)).join('');
   }
 
@@ -895,7 +895,7 @@
   function renderFeaturedProducts() {
     const el = $('#featured-products');
     if (!el) return;
-    const top = [...PRODUCTS].sort((a, b) => b.rating - a.rating).slice(0, 4);
+    const top = [...PRODUCTS].sort((a, b) => b.rating - a.rating).slice(0, 3);
     el.innerHTML = top.map(renderProductCard).join('');
   }
 
