@@ -308,6 +308,36 @@ ul[role="list"] { list-style: none; }
 }
 .btn-icon:hover { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
 
+.btn-icon[data-tooltip] {
+  position: relative;
+}
+.btn-icon[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 6px);
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3rem 0.55rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 1100;
+}
+.btn-icon[data-tooltip]:hover::after,
+.btn-icon[data-tooltip]:focus-visible::after {
+  opacity: 1;
+}
+
 .cart-count {
   position: absolute;
   top: -6px;

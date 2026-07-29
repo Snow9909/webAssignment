@@ -481,14 +481,34 @@
 
   // ─── Theme ────────────────────────────────────────────────────────────
 
+  function updateIconTooltips() {
+    const themeBtn = $('#theme-toggle');
+    if (themeBtn) {
+      themeBtn.dataset.tooltip = state.theme === 'dark' ? 'Light theme' : 'Dark theme';
+    }
+    const musicBtn = $('#music-toggle');
+    if (musicBtn) {
+      const playing = musicBtn.getAttribute('aria-pressed') === 'true';
+      musicBtn.dataset.tooltip = playing ? 'Pause music' : 'Play music';
+    }
+    const cartBtn = $('#cart-toggle');
+    if (cartBtn) cartBtn.dataset.tooltip = 'Shopping cart';
+  }
+
+  function initIconTooltips() {
+    updateIconTooltips();
+  }
+
   function initTheme() {
     document.documentElement.setAttribute('data-theme', state.theme);
     $('#theme-toggle').textContent = state.theme === 'dark' ? '🌙' : '☀️';
+    updateIconTooltips();
 
     $('#theme-toggle')?.addEventListener('click', () => {
       state.theme = state.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', state.theme);
       $('#theme-toggle').textContent = state.theme === 'dark' ? '🌙' : '☀️';
+      updateIconTooltips();
       saveState();
     });
   }
@@ -519,6 +539,7 @@
       btn.textContent = playing ? '⏸️' : '🎵';
       btn.setAttribute('aria-pressed', String(playing));
       btn.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+      updateIconTooltips();
     }
 
     function stopMusic() {
@@ -2126,6 +2147,7 @@
     initEmailJS();
     initTheme();
     initMusic();
+    initIconTooltips();
     initNavigation();
     initAccordions();
     initCart();
