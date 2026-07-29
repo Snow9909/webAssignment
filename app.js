@@ -856,7 +856,7 @@
     return p.price * (1 - p.discount / 100);
   }
 
-  function renderProductCard(p) {
+  function renderProductCard(p, showCompare = true) {
     const price = getProductPrice(p);
     const wished = state.wishlist.includes(p.id);
     const compared = state.compare.includes(p.id);
@@ -877,7 +877,7 @@
           </p>
           <div class="card-actions">
             <button class="btn btn-primary btn-sm add-cart-btn" data-id="${p.id}">Add to Cart</button>
-            <button class="btn btn-outline btn-sm compare-btn" data-id="${p.id}">${compared ? '✓ Compare' : 'Compare'}</button>
+            ${showCompare ? `<button class="btn btn-outline btn-sm compare-btn" data-id="${p.id}">${compared ? '✓ Compare' : 'Compare'}</button>` : ''}
           </div>
         </div>
       </article>`;
@@ -896,7 +896,7 @@
     const el = $('#featured-products');
     if (!el) return;
     const top = [...PRODUCTS].sort((a, b) => b.rating - a.rating).slice(0, 3);
-    el.innerHTML = top.map(renderProductCard).join('');
+    el.innerHTML = top.map(p => renderProductCard(p, false)).join('');
   }
 
   // ─── Cart ───────────────────────────────────────────────────────────────
