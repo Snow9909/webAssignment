@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Tabletop Tavern - Board Game Lounge & TCG Store. Rent games, shop hobby supplies, reserve tables, and join tournaments.">
+  <title>The Tabletop Tavern | Board Game Lounge & TCG Store</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body data-page="home">
+  <!-- Header & Navigation -->
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a href="index.html" class="logo" aria-label="The Tabletop Tavern Home">
+          <span class="logo-icon">🎲</span>
+          <span class="logo-text">The Tabletop Tavern</span>
+        </a>
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="main-nav" class="main-nav" role="navigation" aria-label="Main navigation">
+          <ul role="list">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="explore-book.html" class="nav-link">Explore & Book</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="faq.html" class="nav-link">FAQ</a></li>
+            <li><a href="membership.html" class="nav-link">Membership</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <button id="music-toggle" class="btn-icon" type="button" aria-label="Play background music" aria-pressed="false">🎵</button>
+          <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+          <button id="cart-toggle" class="btn-icon cart-btn" aria-label="Open shopping cart">
+            🛒<span id="cart-count" class="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-frame">
+
+      <!-- MODULE 1: HOME -->
+      <section id="home" class="section hero-section" aria-labelledby="hero-heading">
+        <div class="hero-slider">
+          <div class="hero-slide active" style="background-image:url('images/hero.jpg')">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+              <h1 id="hero-heading">The Tabletop Tavern</h1>
+              <p class="hero-slogan">Where Every Roll Tells a Story</p>
+              <div class="hero-cta">
+                <a href="explore-book.html#rentals" class="btn btn-primary btn-lg">Browse Board Games</a>
+                <a href="explore-book.html#booking" class="btn btn-secondary btn-lg">Reserve a Table</a>
+                <a href="events.html" class="btn btn-outline btn-lg">View Events</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="hero-stats">
+            <div class="stat-card"><span class="stat-num">500+</span><span class="stat-label">Board Games</span></div>
+            <div class="stat-card"><span class="stat-num">24</span><span class="stat-label">Gaming Tables</span></div>
+            <div class="stat-card"><span class="stat-num">50+</span><span class="stat-label">Weekly Events</span></div>
+            <div class="stat-card"><span class="stat-num">4.9★</span><span class="stat-label">Customer Rating</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Opening Hours (below hero) -->
+      <section class="section hours-section hours-section--top" aria-labelledby="hours-heading">
+        <div class="container">
+          <div class="hours-card hours-card--featured">
+            <h2 id="hours-heading">Opening Hours</h2>
+            <ul class="hours-list">
+              <li><span>Mon – Thu</span><span>12:00 PM – 10:00 PM</span></li>
+              <li><span>Fri – Sat</span><span>10:00 AM – 12:00 AM</span></li>
+              <li><span>Sunday</span><span>10:00 AM – 8:00 PM</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Games -->
+      <section class="section featured-section" aria-labelledby="featured-heading">
+        <div class="container">
+          <h2 id="featured-heading" class="section-title">Featured Board Games</h2>
+          <div id="featured-games" class="card-grid"></div>
+          <p class="section-cta"><a href="explore-book.html#rentals" class="btn btn-outline">View Full Rental Catalogue</a></p>
+        </div>
+      </section>
+
+      <!-- Popular TCG -->
+      <section class="section tcg-section" aria-labelledby="tcg-heading">
+        <div class="container">
+          <h2 id="tcg-heading" class="section-title">Popular TCG Products</h2>
+          <div id="featured-products" class="card-grid"></div>
+          <p class="section-cta"><a href="shop.html" class="btn btn-outline">Browse the Shop</a></p>
+        </div>
+      </section>
+
+      <!-- Tournament Countdown -->
+      <section class="section countdown-section" aria-labelledby="countdown-heading">
+        <div class="container countdown-banner">
+          <div class="countdown-info">
+            <h2 id="countdown-heading">Next Tournament</h2>
+            <p id="countdown-event-name">Friday Night Magic — Standard Format</p>
+          </div>
+          <div id="tournament-countdown" class="countdown-timer" aria-live="polite">
+            <div class="countdown-unit"><span id="cd-days">00</span><small>Days</small></div>
+            <div class="countdown-unit"><span id="cd-hours">00</span><small>Hours</small></div>
+            <div class="countdown-unit"><span id="cd-mins">00</span><small>Mins</small></div>
+            <div class="countdown-unit"><span id="cd-secs">00</span><small>Secs</small></div>
+          </div>
+          <a href="events.html" class="btn btn-primary">Register Now</a>
+        </div>
+      </section>
+
+      <!-- Membership Promo -->
+      <section class="section promo-section" aria-labelledby="promo-heading">
+        <div class="container promo-banner">
+          <div class="promo-content">
+            <h2 id="promo-heading">Join the Guild — Save 20%</h2>
+            <p>Become a member and enjoy exclusive discounts, priority bookings, and free game rentals.</p>
+            <a href="membership.html" class="btn btn-accent">View Membership Plans</a>
+          </div>
+          <img src="images/promo.jpg" alt="Board game night at the tavern" class="promo-img" loading="lazy">
+        </div>
+      </section>
+
+      <!-- Reviews Preview -->
+      <section class="section reviews-preview" aria-labelledby="reviews-preview-heading">
+        <div class="container">
+          <h2 id="reviews-preview-heading" class="section-title">What Players Say</h2>
+          <div id="reviews-slider" class="reviews-slider"></div>
+          <p class="section-cta"><a href="faq.html" class="btn btn-outline">Read All Reviews & Gallery</a></p>
+        </div>
+      </section>
+
+      <!-- MODULE 1: ABOUT -->
+      <section id="about" class="section about-section" aria-labelledby="about-heading">
+        <div class="container">
+          <h2 id="about-heading" class="section-title">About the Tavern & Lounge</h2>
+          <img src="images/games/board-lounge.jpg" alt="Cozy board game lounge interior" class="about-lead-image" loading="lazy">
+          <div class="about-grid">
+            <div class="about-text-block">
+              <h3>Our Story</h3>
+              <p>Founded in 2018 by lifelong gamers Marcus Chen and Priya Sharma, The Tabletop Tavern began as a dream to create a welcoming space where strategy, laughter, and community collide. What started as a 6-table café has grown into the city's premier board game lounge and TCG destination.</p>
+              <h3>Mission & Vision</h3>
+              <p><strong>Mission:</strong> To foster inclusive gaming communities through exceptional service, curated collections, and memorable experiences.</p>
+              <p><strong>Vision:</strong> To be Southeast Asia's most beloved tabletop gaming destination.</p>
+            </div>
+            <div class="values-grid">
+              <div class="value-card"><span>🤝</span><h4>Community First</h4><p>Everyone belongs at our table.</p></div>
+              <div class="value-card"><span>🎯</span><h4>Curated Quality</h4><p>Every game hand-picked for fun.</p></div>
+              <div class="value-card"><span>🛡️</span><h4>Safe Space</h4><p>Zero tolerance for harassment.</p></div>
+              <div class="value-card"><span>♻️</span><h4>Sustainability</h4><p>Rent, don't hoard — share the joy.</p></div>
+            </div>
+          </div>
+
+          <!-- House Rules Accordion -->
+          <h3 class="subsection-title">House Rules</h3>
+          <div class="accordion" id="house-rules">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Respect Fellow Players</button>
+              <div class="accordion-panel"><p>Treat all guests with courtesy. No trash talk, gloating, or unsportsmanlike conduct. We're here to have fun together.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Return Games Intact</button>
+              <div class="accordion-panel"><p>Count all pieces before and after play. Report missing components immediately. Replacement fees apply for lost items.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">No Food/Drinks on TCG Tables</button>
+              <div class="accordion-panel"><p>TCG tournament areas are drink-free zones. Snacks are welcome at standard tables only. Use coasters always.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Child Supervision</button>
+              <div class="accordion-panel"><p>Children under 12 must be accompanied by an adult at all times. Family tables are available in the lounge area.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Reasonable Noise Levels</button>
+              <div class="accordion-panel"><p>Celebrate victories — but respect others concentrating. Use private rooms for loud party games.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Tournament Rules</button>
+              <div class="accordion-panel"><p>Official tournament rules apply during events. Judges' decisions are final. Register 15 minutes before start time.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">Report Damaged Items</button>
+              <div class="accordion-panel"><p>Found damaged games or equipment? Tell staff immediately. Never attempt repairs yourself.</p></div>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <h3 class="subsection-title">Our Journey</h3>
+          <div class="timeline" id="company-timeline">
+            <div class="timeline-item"><span class="timeline-year">2018</span><p>Opened doors with 6 tables and 100 games.</p></div>
+            <div class="timeline-item"><span class="timeline-year">2019</span><p>Launched TCG tournament series — 200+ members.</p></div>
+            <div class="timeline-item"><span class="timeline-year">2021</span><p>Expanded to 24 tables, added private rooms.</p></div>
+            <div class="timeline-item"><span class="timeline-year">2023</span><p>Opened hobby boutique with 2,000+ SKUs.</p></div>
+            <div class="timeline-item"><span class="timeline-year">2025</span><p>Named "Best Game Lounge" by KL Gaming Awards.</p></div>
+          </div>
+
+          <!-- Team -->
+          <h3 class="subsection-title">Meet the Team</h3>
+          <div class="team-grid" id="team-grid"></div>
+        </div>
+      </section>
+
+      <!-- MODULE 1: CONTACT -->
+      <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+        <div class="container">
+          <h2 id="contact-heading" class="section-title">Contact Us & Location</h2>
+          <div class="contact-grid">
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Name *</label>
+                <input type="text" id="contact-name" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email *</label>
+                <input type="email" id="contact-email" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-purpose">Purpose *</label>
+                <select id="contact-purpose" required>
+                  <option value="">Select purpose</option>
+                  <option value="Booking">Booking</option>
+                  <option value="Product">Product Inquiry</option>
+                  <option value="Tournament">Tournament</option>
+                  <option value="Membership">Membership</option>
+                  <option value="Feedback">Feedback</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message * <span id="char-count">0/500</span></label>
+                <textarea id="contact-message" rows="5" maxlength="500" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <div class="contact-info">
+              <h3>Visit Us</h3>
+              <p id="contact-address">42 Dice Lane, Boardwalk District, Kuala Lumpur 50450, Malaysia</p>
+              <button id="copy-address" class="btn btn-outline btn-sm">Copy Address</button>
+              <p>📞 +60 3-1234 5678</p>
+              <p>✉️ hello@tabletoptavern.my</p>
+              <h3>Getting Here</h3>
+              <ul>
+                <li><strong>LRT:</strong> Hang Tuah Station — 5 min walk</li>
+                <li><strong>Bus:</strong> Routes 300, 402 stop at Boardwalk</li>
+                <li><strong>Parking:</strong> Basement B1-B2, first 2 hours free for members</li>
+              </ul>
+              <h3>Nearby Landmarks</h3>
+              <p>Central Market (200m), Petaling Street (400m), KL Tower (1.2km)</p>
+              <div class="contact-map">
+                <iframe title="Map to The Tabletop Tavern" src="https://www.openstreetmap.org/export/embed.html?bbox=101.6869%2C3.1390%2C101.6969%2C3.1490&layer=mapnik&marker=3.1440%2C101.6919" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <span class="logo-icon">🎲</span>
+          <h3>The Tabletop Tavern</h3>
+          <p>Your home for board games, TCG, and community.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="explore-book.html">Explore & Book</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="explore-book.html">Book a Table</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#about">House Rules</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </div>
+        <div class="footer-hours-card hours-card">
+          <h4>Opening Hours</h4>
+          <ul class="hours-list">
+            <li><span>Mon – Thu</span><span>12:00 PM – 10:00 PM</span></li>
+            <li><span>Fri – Sat</span><span>10:00 AM – 12:00 AM</span></li>
+            <li><span>Sunday</span><span>10:00 AM – 8:00 PM</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 The Tabletop Tavern. All rights reserved.</p>
+      </div>
+    </footer>
+
+  <!-- Shopping Cart Slide-out -->
+  <aside id="cart-panel" class="cart-panel" aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="cart-close" class="btn-icon" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-promo">
+        <input type="text" id="cart-promo" placeholder="Promo code">
+        <button id="cart-apply-promo" class="btn btn-outline btn-sm">Apply</button>
+      </div>
+      <p class="cart-subtotal">Subtotal: <strong id="cart-subtotal">RM 0.00</strong></p>
+      <p class="cart-shipping">Pickup: Free | Shipping: RM 12</p>
+      <a href="shop.html#checkout" id="cart-checkout" class="btn btn-primary btn-block">Proceed to Checkout</a>
+      <button id="cart-empty" class="btn btn-outline btn-block">Empty Cart</button>
+    </div>
+  </aside>
+  <div id="cart-overlay" class="overlay hidden"></div>
+
+  <!-- Generic Modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close btn-icon" aria-label="Close modal">✕</button>
+      <h2 id="modal-title" class="modal-title"></h2>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close btn-icon" aria-label="Close lightbox">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <!-- Membership Popup Banner -->
+  <div id="membership-popup" class="membership-popup hidden" role="dialog" aria-label="Membership promotion">
+    <button class="popup-close btn-icon" aria-label="Dismiss">✕</button>
+    <h3>🎉 Welcome! Get 10% off your first visit</h3>
+    <p>Join our newsletter for exclusive deals and event updates.</p>
+    <input type="email" id="popup-email" placeholder="Your email">
+    <button id="popup-subscribe" class="btn btn-accent">Subscribe</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

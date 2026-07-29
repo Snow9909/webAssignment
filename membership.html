@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join The Tabletop Tavern membership — Bronze, Silver, and Gold tiers with exclusive perks.">
+  <title>Membership | The Tabletop Tavern</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body data-page="membership">
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><span class="logo-icon">🎲</span><span class="logo-text">The Tabletop Tavern</span></a>
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <nav id="main-nav" class="main-nav" role="navigation">
+        <ul role="list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="explore-book.html" class="nav-link">Explore & Book</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="membership.html" class="nav-link active">Membership</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="music-toggle" class="btn-icon" type="button" aria-label="Play background music" aria-pressed="false">🎵</button>
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+        <button id="cart-toggle" class="btn-icon cart-btn" aria-label="Open cart">🛒<span id="cart-count" class="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-frame">
+    <div class="page-banner page-banner--membership">
+      <div class="container">
+        <h1>Membership Plans</h1>
+        <p>Join the Guild and unlock discounts, free rentals, priority booking, and exclusive events.</p>
+      </div>
+    </div>
+
+    <section class="section membership-section">
+      <div class="container">
+        <div id="member-status" class="member-status hidden"></div>
+        <div class="billing-toggle">
+          <span class="billing-label">Monthly</span>
+          <label class="switch">
+            <input type="checkbox" id="billing-toggle">
+            <span class="slider-switch"></span>
+          </label>
+          <span class="billing-label">Yearly <span class="badge">Save 20%</span></span>
+        </div>
+        <div id="membership-tiers" class="membership-grid"></div>
+        <div id="membership-comparison" class="comparison-matrix"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><span class="logo-icon">🎲</span><h3>The Tabletop Tavern</h3><p>Your home for board games, TCG, and community.</p></div>
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="explore-book.html">Explore & Book</a></li><li><a href="shop.html">Shop</a></li><li><a href="explore-book.html#booking">Book a Table</a></li></ul></div>
+      <div class="footer-links"><h4>Support</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+      <div class="footer-hours-card hours-card">
+        <h4>Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Mon – Thu</span><span>12:00 PM – 10:00 PM</span></li>
+          <li><span>Fri – Sat</span><span>10:00 AM – 12:00 AM</span></li>
+          <li><span>Sunday</span><span>10:00 AM – 8:00 PM</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 The Tabletop Tavern. All rights reserved.</p></div>
+  </footer>
+
+  <aside id="cart-panel" class="cart-panel" aria-hidden="true">
+    <div class="cart-header"><h2>Your Cart</h2><button id="cart-close" class="btn-icon">✕</button></div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <p class="cart-subtotal">Subtotal: <strong id="cart-subtotal">RM 0.00</strong></p>
+      <a href="shop.html#checkout" id="cart-checkout" class="btn btn-primary btn-block">Proceed to Checkout</a>
+    </div>
+  </aside>
+  <div id="cart-overlay" class="overlay hidden"></div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close btn-icon">✕</button>
+      <h2 id="modal-title" class="modal-title"></h2>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

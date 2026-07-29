@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore The Tabletop Tavern, rent board games, and reserve your gaming table.">
+  <title>Explore & Book | The Tabletop Tavern</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body data-page="explore-book">
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><span class="logo-icon">🎲</span><span class="logo-text">The Tabletop Tavern</span></a>
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <nav id="main-nav" class="main-nav" role="navigation">
+        <ul role="list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="explore-book.html" class="nav-link active">Explore & Book</a></li>
+          <li><a href="events.html" class="nav-link">Events</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="membership.html" class="nav-link">Membership</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="music-toggle" class="btn-icon" type="button" aria-label="Play background music" aria-pressed="false">🎵</button>
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+        <button id="cart-toggle" class="btn-icon cart-btn" aria-label="Open cart">🛒<span id="cart-count" class="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-frame">
+    <div class="page-banner page-banner--explore">
+      <div class="container">
+        <h1>Explore & Book</h1>
+        <p>Rent board games, explore our lounge floor plan, and reserve the perfect table for your group.</p>
+      </div>
+    </div>
+
+    <section id="rentals" class="section rentals-section" aria-labelledby="rentals-heading">
+      <div class="container">
+        <h2 id="rentals-heading" class="section-title">Board Game Rental Catalogue</h2>
+        <div class="filter-bar" id="rental-filters">
+          <input type="search" id="rental-search" placeholder="Search games..." aria-label="Search board games">
+          <select id="rental-category" aria-label="Filter by category">
+            <option value="">All Categories</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Family">Family</option>
+            <option value="Party">Party</option>
+            <option value="Coop">Coop</option>
+            <option value="Card">Card</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Edu">Educational</option>
+          </select>
+          <select id="rental-difficulty" aria-label="Filter by difficulty">
+            <option value="">Any Difficulty</option>
+            <option value="1">Easy (1)</option>
+            <option value="2">Light (2)</option>
+            <option value="3">Medium (3)</option>
+            <option value="4">Hard (4)</option>
+            <option value="5">Expert (5)</option>
+          </select>
+          <select id="rental-players" aria-label="Filter by player count">
+            <option value="">Any Players</option>
+            <option value="2">2 Players</option>
+            <option value="3">3+ Players</option>
+            <option value="4">4+ Players</option>
+            <option value="6">6+ Players</option>
+          </select>
+          <select id="rental-sort" aria-label="Sort rentals">
+            <option value="popularity">Sort: Popularity</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+          <label class="toggle-label"><input type="checkbox" id="rental-available"> Available Only</label>
+        </div>
+        <div id="rental-grid" class="card-grid"></div>
+      </div>
+    </section>
+
+    <section id="floorplan" class="section floorplan-section" aria-labelledby="floorplan-heading">
+      <div class="container">
+        <h2 id="floorplan-heading" class="section-title">Interactive Lounge Floor Plan</h2>
+        <p class="section-desc">Click any area to view details. <span class="legend"><span class="dot available"></span> Available</span> <span class="legend"><span class="dot occupied"></span> Occupied</span> <span class="legend"><span class="dot non-bookable"></span> Not for booking</span></p>
+        <div class="floor-plan-controls form-grid">
+          <div class="form-group">
+            <label for="plan-date">Date</label>
+            <input type="date" id="plan-date" aria-label="Floor plan date">
+          </div>
+          <div class="form-group">
+            <label for="plan-time">Time Slot</label>
+            <select id="plan-time" aria-label="Floor plan time">
+              <option value="">Select time</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="14:00">2:00 PM</option>
+              <option value="16:00">4:00 PM</option>
+              <option value="18:00">6:00 PM</option>
+              <option value="20:00">8:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <p id="floor-plan-hint" class="form-hint floor-plan-hint">Select a date and time above to see live availability on the map.</p>
+        <div id="room-player-guide" class="room-player-guide"></div>
+        <div id="floor-plan" class="floor-plan" role="img" aria-label="Interactive floor plan"></div>
+      </div>
+    </section>
+
+    <section id="booking" class="section booking-section" aria-labelledby="booking-heading">
+      <div class="container">
+        <h2 id="booking-heading" class="section-title">Table Reservation</h2>
+        <form id="booking-form" class="booking-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="book-name">Full Name *</label>
+              <input type="text" id="book-name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="book-email">Email *</label>
+              <input type="email" id="book-email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="book-phone">Phone *</label>
+              <input type="tel" id="book-phone" required autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="book-date">Date *</label>
+              <input type="date" id="book-date" required>
+            </div>
+            <div class="form-group">
+              <label for="book-time">Time Slot *</label>
+              <select id="book-time" required>
+                <option value="">Select time</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="20:00">8:00 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="book-players">Players *</label>
+              <input type="number" id="book-players" min="1" max="32" value="2" required>
+              <p id="player-capacity-hint" class="form-hint"></p>
+              <p id="player-capacity-warning" class="form-hint error hidden" role="alert"></p>
+            </div>
+            <div class="form-group">
+              <label for="book-duration">Duration *</label>
+              <select id="book-duration" required>
+                <option value="1">1 hour</option>
+                <option value="2" selected>2 hours</option>
+                <option value="3">3 hours</option>
+                <option value="4">4 hours</option>
+                <option value="5">5 hours</option>
+                <option value="6">6 hours</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="book-table-type">Table Type *</label>
+              <select id="book-table-type" required>
+                <option value="standard">Standard Table — RM 15/hr (4–6 players)</option>
+                <option value="premium">Premium Table — RM 25/hr (6–8 players)</option>
+                <option value="private">Private Room — RM 50/hr (8–12 players)</option>
+                <option value="tcg">TCG Tournament Area — RM 20/hr (2–32 players)</option>
+                <option value="workshop">Workshop Table — RM 18/hr (4–12 players)</option>
+              </select>
+            </div>
+            <div class="form-group full-width game-rentals-group">
+              <label>Optional Game Rentals</label>
+              <p class="form-hint">Add games one at a time — up to 5 optional rentals.</p>
+              <div id="game-rental-picks" class="game-rental-picks"></div>
+            </div>
+          </div>
+          <div id="booking-summary" class="booking-summary">
+            <h3>Price Summary</h3>
+            <p>Table: <span id="summary-table">RM 0</span></p>
+            <p>Games: <span id="summary-games">RM 0</span></p>
+            <p id="summary-member-line" class="summary-member hidden">Member savings: <span id="summary-member-savings">RM 0</span></p>
+            <p id="summary-priority-line" class="summary-priority hidden">✓ Priority booking applied</p>
+            <p>Deposit (refundable): <span id="summary-deposit">RM 0</span></p>
+            <p class="summary-total">Total: <strong id="summary-total">RM 0</strong> + Deposit: <span id="summary-deposit-inline">RM 0</span></p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Confirm Reservation</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="rental-calculator" class="section rental-calc-section" aria-labelledby="calc-heading">
+      <div class="container">
+        <div class="rental-calculator">
+          <h2 id="calc-heading">Rental Cost Calculator</h2>
+          <p class="section-desc">Choose a game and enter the number of rental days.</p>
+          <div class="calc-controls">
+            <div class="form-group">
+              <label for="calc-game">Game</label>
+              <select id="calc-game" aria-label="Select game for rental calculator">
+                <option value="">— Select a game —</option>
+              </select>
+            </div>
+            <label class="calc-days-label">Days:
+              <input type="number" id="calc-days" min="1" max="30" value="1" aria-label="Number of rental days">
+            </label>
+            <p>Daily rate: <span id="calc-base">RM 0</span></p>
+            <p id="calc-member-note" class="calc-member-note hidden"></p>
+            <p class="calc-total">Total: <strong id="calc-total">RM 0</strong> + Deposit: <span id="calc-deposit">RM 0</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><span class="logo-icon">🎲</span><h3>The Tabletop Tavern</h3><p>Your home for board games, TCG, and community.</p></div>
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="explore-book.html">Explore & Book</a></li><li><a href="shop.html">Shop</a></li><li><a href="events.html">Events</a></li></ul></div>
+      <div class="footer-links"><h4>Support</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+      <div class="footer-hours-card hours-card">
+        <h4>Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Mon – Thu</span><span>12:00 PM – 10:00 PM</span></li>
+          <li><span>Fri – Sat</span><span>10:00 AM – 12:00 AM</span></li>
+          <li><span>Sunday</span><span>10:00 AM – 8:00 PM</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 The Tabletop Tavern. All rights reserved.</p></div>
+  </footer>
+
+  <aside id="cart-panel" class="cart-panel" aria-hidden="true">
+    <div class="cart-header"><h2>Your Cart</h2><button id="cart-close" class="btn-icon">✕</button></div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <p class="cart-subtotal">Subtotal: <strong id="cart-subtotal">RM 0.00</strong></p>
+      <a href="shop.html#checkout" class="btn btn-primary btn-block">Proceed to Checkout</a>
+    </div>
+  </aside>
+  <div id="cart-overlay" class="overlay hidden"></div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close btn-icon">✕</button>
+      <h2 id="modal-title" class="modal-title"></h2>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
