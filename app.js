@@ -501,7 +501,7 @@
 
   // ─── Background Music ─────────────────────────────────────────────────
 
-  const MUSIC_SRC = 'audio/echoes-in-blue-by-tokyo-music-walker-chosic.com_.mp3';
+  const MUSIC_SRC = 'audio/alex-morgan-jazz-restaurant-music-556244.mp3';
 
   function initMusic() {
     const btn = $('#music-toggle');
