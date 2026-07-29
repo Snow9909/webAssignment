@@ -430,12 +430,6 @@
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
-    toast.style.cssText = `
-      position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
-      padding:0.75rem 1.5rem;border-radius:8px;z-index:9999;font-weight:600;
-      background:${type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#ff9800'};
-      color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeIn 0.3s ease;
-    `;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3500);
   }
