@@ -414,6 +414,15 @@ ul[role="list"] { list-style: none; }
   font-style: italic;
 }
 .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.hero-cta .btn-outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+.hero-cta .btn-outline:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
 
 .hero-stats {
   display: grid;
@@ -1531,6 +1540,24 @@ body.compare-open { padding-bottom: min(50vh, 320px); }
   margin-bottom: 0.75rem;
   font-size: 1.05rem;
 }
+.footer-hours-card .hours-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.65rem 0;
+  text-align: center;
+}
+.footer-hours-card .hours-list li span:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.footer-hours-card .hours-list li span:last-child {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
 .footer-hours-card .hours-list li:last-child { border-bottom: none; }
 
 .member-badge {
@@ -1747,11 +1774,6 @@ body.compare-open { padding-bottom: min(50vh, 320px); }
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-  }
-  .hours-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
   }
   .footer-hours-card { padding: 1.25rem 1rem; }
   .billing-toggle { flex-wrap: wrap; justify-content: center; }
