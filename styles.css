@@ -511,6 +511,12 @@ ul[role="list"] { list-style: none; }
 .card-meta { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
 .card-meta span { margin-right: 0.75rem; }
 .card-price { font-size: 1.25rem; font-weight: 700; color: var(--accent); margin-top: auto; }
+.card-price small,
+.deposit-note {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
 .card-actions {
   display: flex;
   gap: 0.5rem;
@@ -903,6 +909,7 @@ input[type="time"]::-webkit-calendar-picker-indicator,
   font-size: 1rem;
 }
 .calc-total { font-size: 1.1rem; margin-top: 0.75rem; color: var(--accent); }
+.calc-total .deposit-note { font-size: 0.8rem; }
 .rental-calc-section { padding-bottom: calc(var(--section-pad-y) + 2rem); }
 
 .game-card-link {
@@ -1181,6 +1188,11 @@ input[type="time"]::-webkit-calendar-picker-indicator,
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--border);
+}
+.summary-total .deposit-note {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 .summary-line { display: flex; justify-content: space-between; padding: 0.25rem 0; }
 

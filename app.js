@@ -634,7 +634,7 @@
             <span>⏱ ${game.duration}</span>
           </p>
           <p class="card-meta">Age: ${game.age} · Difficulty: <span class="difficulty-dots">${difficultyDots(game.difficulty)}</span></p>
-          <p class="card-price">${formatRM(game.price)}/day <small>+ ${formatRM(game.deposit)} deposit</small></p>
+          <p class="card-price">${formatRM(game.price)}/day <small class="deposit-note">+ ${formatRM(game.deposit)} deposit</small></p>
           <div class="card-actions">
             <button class="btn btn-primary btn-sm rent-btn" data-id="${game.id}" ${!game.available ? 'disabled' : ''}>Rent Game</button>
             <button type="button" class="btn btn-outline btn-sm select-calc-btn" data-id="${game.id}">Calculator</button>
