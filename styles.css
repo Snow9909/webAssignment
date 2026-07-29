@@ -1003,7 +1003,8 @@ input[type="time"]::-webkit-calendar-picker-indicator,
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0.5rem;
-  contain: inline-size;
+  display: flex;
+  justify-content: center;
 }
 .floor-plan {
   display: grid;
@@ -1015,8 +1016,10 @@ input[type="time"]::-webkit-calendar-picker-indicator,
   border-radius: var(--radius);
   padding: 1rem;
   min-height: 480px;
-  width: 560px;
-  max-width: none;
+  width: min(560px, 100%);
+  max-width: 560px;
+  margin-inline: auto;
+  flex-shrink: 0;
 }
 .floor-area {
   display: flex;
