@@ -1574,6 +1574,47 @@
     }
   }
 
+  function validateBookingDateTime(date, time) {
+    if (!date) return { valid: false, message: 'Please select a date' };
+    if (!time) return { valid: false, message: 'Please select a time slot' };
+
+    const [year, month, day] = date.split('-').map(Number);
+    const [hours, minutes] = time.split(':').map(Number);
+    const slot = new Date(year, month - 1, day, hours, minutes, 0, 0);
+
+    if (Number.isNaN(slot.getTime())) {
+      return { valid: false, message: 'Please enter a valid date and time' };
+    }
+    if (slot.getTime() <= Date.now()) {
+      return { valid: false, message: 'Please choose a date and time in the future. Past slots cannot be booked.' };
+    }
+    return { valid: true };
+  }
+
+  function applyBookingDateTimeValidation(showMessage = false) {
+    const date = $('#book-date')?.value;
+    const time = $('#book-time')?.value;
+    const dateEl = $('#book-date');
+    const timeEl = $('#book-time');
+
+    if (!date && !time) {
+      dateEl?.classList.remove('error');
+      timeEl?.classList.remove('error');
+      return true;
+    }
+
+    const result = validateBookingDateTime(date, time);
+    if (!result.valid && date && time) {
+      dateEl?.classList.add('error');
+      timeEl?.classList.add('error');
+      if (showMessage) showToast(result.message, 'error');
+    } else {
+      dateEl?.classList.remove('error');
+      timeEl?.classList.remove('error');
+    }
+    return result.valid;
+  }
+
   function initBooking() {
     const dateInput = $('#book-date');
     if (dateInput) {
@@ -1583,11 +1624,13 @@
 
     ['book-duration', 'book-table-type', 'book-date', 'book-time', 'book-players'].forEach(id => {
       $(`#${id}`)?.addEventListener('input', () => {
+        if (id === 'book-date' || id === 'book-time') applyBookingDateTimeValidation();
         validatePlayerCapacity();
         updateBookingSummary();
         renderFloorPlan();
       });
       $(`#${id}`)?.addEventListener('change', () => {
+        if (id === 'book-date' || id === 'book-time') applyBookingDateTimeValidation();
         validatePlayerCapacity();
         updateBookingSummary();
         renderFloorPlan();
@@ -1615,17 +1658,20 @@
       if (!phone) { valid = false; $('#book-phone').classList.add('error'); }
       else $('#book-phone').classList.remove('error');
 
-      if (!date) { valid = false; showToast('Please select a date', 'error'); return; }
-
-      const selected = new Date(date);
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
-      if (selected < now) {
-        showToast('Cannot book past dates — please check the date (mistake prevention)', 'error');
+      const dateTimeCheck = validateBookingDateTime(date, time);
+      if (!dateTimeCheck.valid) {
+        if (!date) $('#book-date')?.classList.add('error');
+        if (!time) $('#book-time')?.classList.add('error');
+        if (date && time) {
+          $('#book-date')?.classList.add('error');
+          $('#book-time')?.classList.add('error');
+        }
+        showToast(dateTimeCheck.message, 'error');
         return;
       }
+      $('#book-date')?.classList.remove('error');
+      $('#book-time')?.classList.remove('error');
 
-      if (!time) { valid = false; showToast('Please select a time slot', 'error'); return; }
       if (!valid) { showToast('Please fill in all required fields', 'error'); return; }
       if (!validatePlayerCapacity()) {
         showToast('Too many players for the selected table type', 'error');
@@ -1749,7 +1795,7 @@
       e.preventDefault();
       const name = $('#join-name').value.trim();
       const email = $('#join-email').value.trim();
-      await sendOrderEmail(email, makeOrderId('MB'), [{
+      const sent = await sendOrderEmail(email, makeOrderId('MB'), [{
         name: `${tier.name} Membership${state.billingYearly ? ' (Yearly)' : ' (Monthly)'}`,
         units: 1,
         price
@@ -1772,7 +1818,12 @@
       renderCheckout();
       updateBookingSummary();
       updateRentalCalculator();
-      showToast(`Welcome to ${tier.name}! Your perks are now active.`);
+      showModal(`Welcome to ${tier.name}!`, `
+        <p style="text-align:center;font-size:3rem">🎉</p>
+        <p>Congratulations, <strong>${name}</strong>! You are now a <strong>${tier.name}</strong> member.</p>
+        <p>Your perks are active right away — member discounts apply automatically when you shop or book.</p>
+        <p>${sent ? `A confirmation email has been sent to <strong>${email}</strong>.` : `We could not send your confirmation email — please contact us at the tavern to confirm your membership.`}</p>
+      `);
     });
   }
 
