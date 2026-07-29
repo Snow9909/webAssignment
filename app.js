@@ -888,7 +888,7 @@
     if (!grid) return;
     const products = getFilteredProducts();
     grid.innerHTML = products.length
-      ? products.map(renderProductCard).join('')
+      ? products.map(p => renderProductCard(p)).join('')
       : '<p class="empty-state">No products match your filters.</p>';
   }
 
