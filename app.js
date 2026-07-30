@@ -959,6 +959,7 @@
     if (!state.cart.length) {
       itemsEl.innerHTML = '<div class="cart-empty-state"><p>Your cart is empty</p><a href="shop.html" class="btn btn-primary">Browse Shop</a></div>';
       $('#cart-subtotal').textContent = formatRM(0);
+      renderCheckout();
       return;
     }
 
@@ -988,6 +989,7 @@
     const subtotal = getCartSubtotal();
     const discount = subtotal * state.promoDiscount;
     $('#cart-subtotal').textContent = formatRM(subtotal - discount);
+    renderCheckout();
   }
 
   function initCart() {
@@ -2071,7 +2073,7 @@
       }
       $('#membership-popup').classList.add('hidden');
       sessionStorage.setItem('popupDismissed', '1');
-      showToast('Subscribed! Check your inbox for 10% off.');
+      showToast('Subscribed! Thanks for joining our newsletter.');
     });
   }
 
