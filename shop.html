@@ -19,9 +19,8 @@
       <nav id="main-nav" class="main-nav" role="navigation">
         <ul role="list">
           <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="index.html#about" class="nav-link">About</a></li>
           <li><a href="shop.html" class="nav-link active">Shop</a></li>
-          <li><a href="explore-book.html" class="nav-link">Explore & Book</a></li>
+          <li><a href="explore-book.html" class="nav-link">Explore</a></li>
           <li><a href="events.html" class="nav-link">Events</a></li>
           <li><a href="faq.html" class="nav-link">FAQ</a></li>
           <li><a href="membership.html" class="nav-link">Membership</a></li>
@@ -71,7 +70,6 @@
             <option value="200-300">RM 200 – 300</option>
             <option value="300-500">RM 300 – 500</option>
           </select>
-          <button id="compare-toggle" class="btn btn-outline btn-sm">Compare (<span id="compare-count">0</span>)</button>
         </div>
         <div id="shop-grid" class="card-grid"></div>
       </div>
@@ -104,6 +102,10 @@
                   <div class="form-group"><label for="co-expiry">Expiry *</label><input type="text" id="co-expiry" maxlength="5" placeholder="MM/YY"></div>
                   <div class="form-group"><label for="co-cvv">CVV *</label><input type="text" id="co-cvv" maxlength="4" placeholder="123"></div>
                 </div>
+              </div>
+              <div id="qr-fields" class="qr-payment-fields hidden">
+                <p class="form-hint">Scan this QR code with your banking or e-wallet app to pay.</p>
+                <img src="images/payment-qr.png" alt="Scan to pay with QR code" class="payment-qr-image" width="240" height="240">
               </div>
               <div class="form-group">
                 <label for="co-promo">Promo Code</label>

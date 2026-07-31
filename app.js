@@ -384,7 +384,25 @@
           ${perks.privateDiscount ? `<li>${perks.privateDiscount * 100}% off private rooms</li>` : ''}
           ${perks.parking ? '<li>2hr free parking on visits</li>' : ''}
         </ul>
+        <div class="member-status-actions">
+          <button type="button" id="cancel-membership-btn" class="btn btn-outline">Cancel Membership</button>
+        </div>
       </div>`;
+  }
+
+  function cancelMembership() {
+    if (!state.membership) return;
+    const tier = MEMBERSHIP_TIERS.find(t => t.id === state.membership.tier);
+    if (!confirm(`Cancel your ${tier?.name || ''} membership? Member discounts and perks will no longer apply.`)) return;
+    state.membership = null;
+    saveState();
+    renderMembership();
+    renderMemberBadge();
+    updateCartUI();
+    renderCheckout();
+    updateBookingSummary();
+    updateRentalCalculator();
+    showToast('Membership cancelled.', 'info');
   }
 
   // ─── Utilities ────────────────────────────────────────────────────────
@@ -1779,6 +1797,9 @@
       state.billingYearly = e.target.checked;
       renderMembership();
     });
+    $('#member-status')?.addEventListener('click', e => {
+      if (e.target.closest('#cancel-membership-btn')) cancelMembership();
+    });
   }
 
   function showJoinPlan(tierId) {
@@ -1831,6 +1852,14 @@
 
   // ─── Checkout ─────────────────────────────────────────────────────────
 
+  function resetCheckoutSummary() {
+    $('#co-member-line')?.classList.add('hidden');
+    $('#co-discount-line')?.classList.add('hidden');
+    $('#co-member-discount').textContent = '-RM 0.00';
+    $('#co-discount').textContent = '-RM 0.00';
+    $('#co-shipping').textContent = formatRM(0);
+  }
+
   function renderCheckout() {
     const itemsEl = $('#checkout-items');
     if (!itemsEl) return;
@@ -1839,6 +1868,7 @@
       itemsEl.innerHTML = '<p>Your cart is empty. <a href="#shop">Browse the shop</a></p>';
       $('#co-subtotal').textContent = formatRM(0);
       $('#co-total').textContent = formatRM(0);
+      resetCheckoutSummary();
       return;
     }
 
@@ -1878,6 +1908,13 @@
     $('#co-total').textContent = formatRM(total);
   }
 
+  function updateCheckoutPaymentFields() {
+    const payment = $('input[name="payment"]:checked')?.value;
+    const cardFields = $('#card-fields');
+    if (cardFields) cardFields.style.display = payment === 'card' ? '' : 'none';
+    $('#qr-fields')?.classList.toggle('hidden', payment !== 'qr');
+  }
+
   function initCheckout() {
     $$('input[name="delivery"]').forEach(r => r.addEventListener('change', renderCheckout));
 
@@ -1914,11 +1951,9 @@
     });
 
     $$('input[name="payment"]').forEach(r => {
-      r.addEventListener('change', () => {
-        const cardFields = $('#card-fields');
-        if (cardFields) cardFields.style.display = $('input[name="payment"]:checked')?.value === 'card' ? '' : 'none';
-      });
+      r.addEventListener('change', updateCheckoutPaymentFields);
     });
+    updateCheckoutPaymentFields();
 
     $('#checkout-form')?.addEventListener('submit', async e => {
       e.preventDefault();
@@ -2035,24 +2070,9 @@
     });
   }
 
-  // ─── Visitor Checklist ────────────────────────────────────────────────
+  // ─── Visitor Guide (static ordered list on FAQ) ───────────────────────
 
-  function initVisitorChecklist() {
-    const list = $('#visitor-checklist');
-    if (!list) return;
-
-    $$('#visitor-checklist input').forEach((cb, i) => {
-      cb.checked = state.visitorChecklist.includes(i);
-      cb.addEventListener('change', () => {
-        if (cb.checked) {
-          if (!state.visitorChecklist.includes(i)) state.visitorChecklist.push(i);
-        } else {
-          state.visitorChecklist = state.visitorChecklist.filter(x => x !== i);
-        }
-        saveState();
-      });
-    });
-  }
+  function initVisitorChecklist() {}
 
   // ─── Membership Popup ─────────────────────────────────────────────────
 
